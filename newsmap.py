@@ -14,21 +14,14 @@ class Reuter:
 		
 		text = r.text
 		soup = bs(text, features="lxml")
-		dirty_lines = soup.find_all(class_='story-title')
-		dirty_links = soup.find_all('a href')
-		clean_lines = [n.get_text() for n in dirty_lines]
-#		clean_links = []
-#		clean_links = [x.get_text() for x in dirty_links if dirty_lines in dirty_links]
-#		for x in dirty_links:
-#			print(x)
-#			if x in dirty_lines:
-#				clean_links.append(x.strip())
-			
+		lines = [n.get_text() for n in soup.find_all(class_='story-title')]
+		links = [x.get('href') for x in soup.find_all('a', href=True) if x.p['class'] == 'story-title']
+
 		for i in range(10):
-			print(clean_lines[i].strip())
-#			print(clean_links[i])
+			print(lines[i].strip())
+			print(links[i])
 			print()
-			
+#			
 	
 	def parse_headline():
 		'''
